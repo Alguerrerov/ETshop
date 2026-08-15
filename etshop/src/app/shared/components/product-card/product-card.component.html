@@ -1,0 +1,9 @@
+<a class="card" [routerLink]="['/detalle', dispositivo.id]">
+  <img [src]="dispositivo.imagenPrincipal" [alt]="dispositivo.nombre">
+  <div class="card-info">
+    <span class="marca">{{ dispositivo.marca }}</span>
+    <h3>{{ dispositivo.nombre }}</h3>
+    <p class="precio">{{ dispositivo.precio | currency:'COP':'symbol-narrow':'1.0-0' }}</p>
+    <p class="fecha">Lanzamiento: {{ dispositivo.fechaLanzamiento | date:'MMM yyyy' }}</p>
+  </div>
+</a>

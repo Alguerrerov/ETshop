@@ -22,3 +22,10 @@ export interface Dispositivo {
   reseña: string;
   calificacion: number;
 }
+
+export interface FiltrosDispositivo {
+  texto: string;
+  marca: string;
+  tipo: TipoDispositivo | '';
+  ordenFecha: 'recientes' | 'antiguos';
+}
