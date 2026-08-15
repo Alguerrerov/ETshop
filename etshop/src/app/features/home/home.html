@@ -1,0 +1,26 @@
+<div class="home-container">
+  <header>
+    <h1>Últimos lanzamientos</h1>
+    <app-buscador (busqueda)="onBusqueda($event)"></app-buscador>
+  </header>
+
+  <app-filtros
+    [marcas]="(marcas$ | async) ?? []"
+    (cambioFiltros)="onCambioFiltros($event)">
+  </app-filtros>
+
+  <div class="grid" *ngIf="dispositivos$ | async as dispositivos; else cargando">
+    <app-product-card
+      *ngFor="let d of dispositivos"
+      [dispositivo]="d">
+    </app-product-card>
+
+    <p *ngIf="dispositivos.length === 0" class="sin-resultados">
+      No se encontraron dispositivos con esos filtros.
+    </p>
+  </div>
+
+  <ng-template #cargando>
+    <p>Cargando dispositivos...</p>
+  </ng-template>
+</div>

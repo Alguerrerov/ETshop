@@ -1,0 +1,17 @@
+<div class="filtros">
+  <select [(ngModel)]="marcaSeleccionada" (ngModelChange)="onCambiarMarca()">
+    <option value="">Todas las marcas</option>
+    <option *ngFor="let m of marcas" [value]="m">{{ m }}</option>
+  </select>
+
+  <select [(ngModel)]="tipoSeleccionado" (ngModelChange)="onCambiarTipo()">
+    <option value="">Todos los tipos</option>
+    <option value="celular">Celulares</option>
+    <option value="portatil">Portátiles</option>
+  </select>
+
+  <select [(ngModel)]="ordenFecha" (ngModelChange)="onCambiarOrden()">
+    <option value="recientes">Más recientes</option>
+    <option value="antiguos">Más antiguos</option>
+  </select>
+</div>

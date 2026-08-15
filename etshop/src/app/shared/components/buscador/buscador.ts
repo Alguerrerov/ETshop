@@ -6,8 +6,8 @@ import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
   selector: 'app-buscador',
   standalone: true,
   imports: [FormsModule],
-  templateUrl: './buscador.component.html',
-  styleUrl: './buscador.component.scss'
+  templateUrl: './buscador.html',
+  styleUrl: './buscador.scss'
 })
 export class BuscadorComponent {
   texto = '';
