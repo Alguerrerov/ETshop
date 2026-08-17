@@ -18,7 +18,7 @@ export const DISPOSITIVOS_MOCK: Dispositivo[] = [
       procesador: 'Snapdragon 8 Gen 4'
     },
     descripcion: 'El Galaxy S25 Ultra es un teléfono inteligente de gama alta con una pantalla AMOLED de 6.8 pulgadas, una cámara de 108MP y un procesador Snapdragon 8 Gen 4.',
-    reseña: 'Excelente cámara y rendimiento, ideal para fotografía profesional.',
+    resena: 'Excelente cámara y rendimiento, ideal para fotografía profesional.',
     calificacion: 4.7
   },
   {
@@ -38,7 +38,7 @@ export const DISPOSITIVOS_MOCK: Dispositivo[] = [
       procesador: 'A19 Pro'
     },
     descripcion: 'El iPhone 17 Pro es un teléfono inteligente de gama alta con una pantalla OLED de 6.3 pulgadas, una cámara de 12MP y un procesador A19 Pro.',
-    reseña: 'Rendimiento insuperable y el mejor ecosistema de apps.',
+    resena: 'Rendimiento insuperable y el mejor ecosistema de apps.',
     calificacion: 4.8
   },
   {
@@ -58,7 +58,7 @@ export const DISPOSITIVOS_MOCK: Dispositivo[] = [
       procesador: 'Intel Core Ultra 7'
     },
     descripcion: 'El ThinkPad X1 Carbon es un portátil empresarial liviano con una pantalla de 14 pulgadas y un procesador Intel Core Ultra 7.',
-    reseña: 'Portátil empresarial liviano, teclado excelente para programar.',
+    resena: 'Portátil empresarial liviano, teclado excelente para programar.',
     calificacion: 4.6
   },
   {
@@ -78,7 +78,7 @@ export const DISPOSITIVOS_MOCK: Dispositivo[] = [
       procesador: 'Apple M4'
     },
     descripcion: 'El MacBook Air M4 es un portátil ultraligero con una pantalla Liquid Retina de 13.6 pulgadas y un procesador Apple M4.',
-    reseña: 'Silencioso, liviano y con una batería que dura todo el día.',
+    resena: 'Silencioso, liviano y con una batería que dura todo el día.',
     calificacion: 4.9,
 
   },
@@ -99,7 +99,7 @@ export const DISPOSITIVOS_MOCK: Dispositivo[] = [
       procesador: 'Snapdragon 7s'
     },
     descripcion: 'El Redmi Note 14 Pro es un teléfono inteligente de gama media con una pantalla AMOLED de 6.6 pulgadas, una cámara de 108MP y un procesador Snapdragon 7s.',
-    reseña: 'Muy buena relación precio-calidad para uso diario.',
+    resena: 'Muy buena relación precio-calidad para uso diario.',
     calificacion: 4.3
   },
   {
@@ -119,7 +119,7 @@ export const DISPOSITIVOS_MOCK: Dispositivo[] = [
       procesador: 'Intel Core i9'
     },
     descripcion: 'El ROG Strix G16 es un portátil gamer de alto rendimiento con una pantalla de 16 pulgadas a 240Hz y un procesador Intel Core i9.',
-    reseña: 'Portátil gamer potente, ideal para juegos exigentes.',
+    resena: 'Portátil gamer potente, ideal para juegos exigentes.',
     calificacion: 4.5
   }
 ];

@@ -19,7 +19,7 @@ export interface Dispositivo {
   galeria: string[];
   especificaciones: Especificaciones;
   descripcion: string;
-  reseña: string;
+  resena: string;
   calificacion: number;
 }
 

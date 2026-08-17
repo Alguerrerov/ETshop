@@ -1,0 +1,84 @@
+<div class="detalle-container" *ngIf="dispositivo$ | async as dispositivo; else cargando">
+
+  <a routerLink="/" class="volver">← Volver al listado</a>
+
+  <div class="detalle-grid">
+
+    <!-- Columna izquierda: galería -->
+    <div class="galeria">
+      <div class="imagen-principal">
+        <img [src]="imagenActiva || dispositivo.imagenPrincipal" [alt]="dispositivo.nombre">
+      </div>
+
+      <div class="miniaturas">
+        <button
+          class="miniatura"
+          [class.activa]="(imagenActiva || dispositivo.imagenPrincipal) === dispositivo.imagenPrincipal"
+          (click)="seleccionarImagen(dispositivo.imagenPrincipal)">
+          <img [src]="dispositivo.imagenPrincipal" [alt]="dispositivo.nombre">
+        </button>
+
+        <button
+          *ngFor="let img of dispositivo.galeria"
+          class="miniatura"
+          [class.activa]="imagenActiva === img"
+          (click)="seleccionarImagen(img)">
+          <img [src]="img" [alt]="dispositivo.nombre">
+        </button>
+      </div>
+    </div>
+
+    <!-- Columna derecha: info -->
+    <div class="info">
+      <span class="marca">{{ dispositivo.marca }}</span>
+      <h1>{{ dispositivo.nombre }}</h1>
+
+      <div class="calificacion">
+        ⭐ {{ dispositivo.calificacion }}
+      </div>
+
+      <p class="precio">{{ dispositivo.precio | currency:'COP':'symbol-narrow':'1.0-0' }}</p>
+      <p class="fecha">Lanzamiento: {{ dispositivo.fechaLanzamiento | date:'d MMMM yyyy' }}</p>
+
+      <button class="btn-comprar">Agregar al carrito</button>
+
+      <section class="resena">
+        <h3>Reseña</h3>
+        <p>{{ dispositivo.resena}}</p>
+      </section>
+
+      <section class="especificaciones">
+        <h3>Especificaciones técnicas</h3>
+        <dl>
+          <div class="spec-row">
+            <dt>RAM</dt>
+            <dd>{{ dispositivo.especificaciones.ram }}</dd>
+          </div>
+          <div class="spec-row">
+            <dt>Almacenamiento</dt>
+            <dd>{{ dispositivo.especificaciones.almacenamiento }}</dd>
+          </div>
+          <div class="spec-row">
+            <dt>Pantalla</dt>
+            <dd>{{ dispositivo.especificaciones.pantalla }}</dd>
+          </div>
+          <div class="spec-row">
+            <dt>Batería</dt>
+            <dd>{{ dispositivo.especificaciones.bateria }}</dd>
+          </div>
+          <div class="spec-row">
+            <dt>Procesador</dt>
+            <dd>{{ dispositivo.especificaciones.procesador }}</dd>
+          </div>
+        </dl>
+      </section>
+    </div>
+
+  </div>
+</div>
+
+<ng-template #cargando>
+  <div class="estado-cargando">
+    <p>Cargando dispositivo...</p>
+  </div>
+</ng-template>
