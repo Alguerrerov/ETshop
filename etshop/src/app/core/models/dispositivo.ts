@@ -28,4 +28,7 @@ export interface FiltrosDispositivo {
   marca: string;
   tipo: TipoDispositivo | '';
   ordenFecha: 'recientes' | 'antiguos';
+  rangoPrecio: 'todos' | 'bajo' | 'medio' | 'alto';
 }
+
+

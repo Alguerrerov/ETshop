@@ -1,17 +1,27 @@
 <div class="filtros">
-  <select [(ngModel)]="marcaSeleccionada" (ngModelChange)="onCambiarMarca()">
-    <option value="">Todas las marcas</option>
-    <option *ngFor="let m of marcas" [value]="m">{{ m }}</option>
-  </select>
+  <div class="filtro-item">
+    <label>Marca</label>
+    <select [(ngModel)]="marcaSeleccionada" (ngModelChange)="onCambiarMarca()">
+      <option value="">Todas las marcas</option>
+      <option *ngFor="let m of marcas" [value]="m">{{ m }}</option>
+    </select>
+  </div>
 
-  <select [(ngModel)]="tipoSeleccionado" (ngModelChange)="onCambiarTipo()">
-    <option value="">Todos los tipos</option>
-    <option value="celular">Celulares</option>
-    <option value="portatil">Portátiles</option>
-  </select>
+  <div class="filtro-item">
+    <label>Precio</label>
+    <select [(ngModel)]="rangoPrecio" (ngModelChange)="onCambiarPrecio()">
+      <option value="todos">Todos los precios</option>
+      <option value="bajo">Menos de $2.000.000</option>
+      <option value="medio">$2.000.000 - $6.000.000</option>
+      <option value="alto">Más de $6.000.000</option>
+    </select>
+  </div>
 
-  <select [(ngModel)]="ordenFecha" (ngModelChange)="onCambiarOrden()">
-    <option value="recientes">Más recientes</option>
-    <option value="antiguos">Más antiguos</option>
-  </select>
+  <div class="filtro-item">
+    <label>Ordenar por</label>
+    <select [(ngModel)]="ordenFecha" (ngModelChange)="onCambiarOrden()">
+      <option value="recientes">Más recientes</option>
+      <option value="antiguos">Más antiguos</option>
+    </select>
+  </div>
 </div>

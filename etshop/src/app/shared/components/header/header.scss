@@ -1,0 +1,100 @@
+.app-header {
+  background: var(--color-superficie);
+  border-bottom: 1px solid var(--color-borde);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.top-bar {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-family: var(--fuente-titulo);
+  font-size: 1.4rem;
+  font-weight: 700;
+  white-space: nowrap;
+
+  .logo-mark {
+    color: var(--color-acento);
+  }
+
+  .logo-rest {
+    color: var(--color-texto);
+  }
+}
+
+.buscador {
+  flex: 1;
+  min-width: 220px;
+  max-width: 520px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-fondo);
+  border: 1px solid var(--color-borde);
+  border-radius: 999px;
+  padding: 8px 16px;
+  transition: border-color 0.2s ease;
+
+  &:focus-within {
+    border-color: var(--color-acento);
+  }
+
+  .icono-buscar {
+    color: var(--color-texto-secundario);
+    flex-shrink: 0;
+  }
+
+  input {
+    border: none;
+    background: transparent;
+    outline: none;
+    width: 100%;
+    font-size: 0.9rem;
+    color: var(--color-texto);
+
+    &::placeholder {
+      color: var(--color-texto-secundario);
+    }
+  }
+}
+
+.categorias {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px 14px;
+  display: flex;
+  gap: 10px;
+}
+
+.chip {
+  font-family: var(--fuente-texto);
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 6px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--color-borde);
+  background: var(--color-superficie);
+  color: var(--color-texto-secundario);
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    border-color: var(--color-acento);
+    color: var(--color-acento);
+  }
+
+  &.activo {
+    background: var(--color-acento);
+    border-color: var(--color-acento);
+    color: white;
+  }
+}

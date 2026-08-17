@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { FiltrosDispositivo, TipoDispositivo } from '../../../core/models/dispositivo';
+import { FiltrosDispositivo } from '../../../core/models/dispositivo';
 
 @Component({
   selector: 'app-filtros',
@@ -15,18 +15,18 @@ export class Filtros {
   @Output() cambioFiltros = new EventEmitter<Partial<FiltrosDispositivo>>();
 
   marcaSeleccionada = '';
-  tipoSeleccionado: TipoDispositivo | '' = '';
   ordenFecha: 'recientes' | 'antiguos' = 'recientes';
+  rangoPrecio: FiltrosDispositivo['rangoPrecio'] = 'todos';
 
   onCambiarMarca(): void {
     this.cambioFiltros.emit({ marca: this.marcaSeleccionada });
   }
 
-  onCambiarTipo(): void {
-    this.cambioFiltros.emit({ tipo: this.tipoSeleccionado });
-  }
-
   onCambiarOrden(): void {
     this.cambioFiltros.emit({ ordenFecha: this.ordenFecha });
+  }
+
+  onCambiarPrecio(): void {
+    this.cambioFiltros.emit({ rangoPrecio: this.rangoPrecio });
   }
 }

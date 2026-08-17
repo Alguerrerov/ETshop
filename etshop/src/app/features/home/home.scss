@@ -1,0 +1,39 @@
+.home-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px 60px;
+}
+
+header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+
+  h1 {
+    font-size: 1.8rem;
+    letter-spacing: -0.02em;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.sin-resultados {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--color-texto-secundario);
+  padding: 40px 0;
+  font-size: 0.95rem;
+}
+
+.section-title {
+  font-size: 1.4rem;
+  margin-bottom: 4px;
+}

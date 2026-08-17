@@ -10,11 +10,12 @@ export class DispositivoService {
   private repositorio: IDispositivoRepository = inject(DispositivoMockRepository);
 
   private filtrosSubject = new BehaviorSubject<FiltrosDispositivo>({
-    texto: '',
-    marca: '',
-    tipo: '',
-    ordenFecha: 'recientes'
-  });
+  texto: '',
+  marca: '',
+  tipo: '',
+  ordenFecha: 'recientes',
+  rangoPrecio: 'todos'
+});
 
   filtros$ = this.filtrosSubject.asObservable();
 
@@ -42,18 +43,29 @@ export class DispositivoService {
   }
 
   private aplicarFiltros(dispositivos: Dispositivo[], filtros: FiltrosDispositivo): Dispositivo[] {
-    let resultado = dispositivos.filter(d =>
-      (!filtros.texto || d.nombre.toLowerCase().includes(filtros.texto.toLowerCase())) &&
-      (!filtros.marca || d.marca === filtros.marca) &&
-      (!filtros.tipo || d.tipo === filtros.tipo)
-    );
+  let resultado = dispositivos.filter(d =>
+    (!filtros.texto || d.nombre.toLowerCase().includes(filtros.texto.toLowerCase())) &&
+    (!filtros.marca || d.marca === filtros.marca) &&
+    (!filtros.tipo || d.tipo === filtros.tipo) &&
+    this.cumpleRangoPrecio(d.precio, filtros.rangoPrecio)
+  );
 
-    resultado = resultado.sort((a, b) => {
-      const fechaA = new Date(a.fechaLanzamiento).getTime();
-      const fechaB = new Date(b.fechaLanzamiento).getTime();
-      return filtros.ordenFecha === 'recientes' ? fechaB - fechaA : fechaA - fechaB;
-    });
+  resultado = resultado.sort((a, b) => {
+    const fechaA = new Date(a.fechaLanzamiento).getTime();
+    const fechaB = new Date(b.fechaLanzamiento).getTime();
+    return filtros.ordenFecha === 'recientes' ? fechaB - fechaA : fechaA - fechaB;
+  });
 
-    return resultado;
+  return resultado;
+}
+
+private cumpleRangoPrecio(precio: number, rango: FiltrosDispositivo['rangoPrecio']): boolean {
+  switch (rango) {
+    case 'bajo': return precio < 2000000;
+    case 'medio': return precio >= 2000000 && precio <= 6000000;
+    case 'alto': return precio > 6000000;
+    default: return true; // 'todos'
   }
+}
+
 }

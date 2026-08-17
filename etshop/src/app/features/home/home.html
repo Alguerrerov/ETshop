@@ -1,8 +1,5 @@
 <div class="home-container">
-  <header>
-    <h1>Últimos lanzamientos</h1>
-    <app-buscador (busqueda)="onBusqueda($event)"></app-buscador>
-  </header>
+  <h2 class="section-title">Últimos lanzamientos</h2>
 
   <app-filtros
     [marcas]="(marcas$ | async) ?? []"

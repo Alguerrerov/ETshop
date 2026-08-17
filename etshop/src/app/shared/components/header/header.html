@@ -1,0 +1,39 @@
+<header class="app-header">
+  <div class="top-bar">
+    <a routerLink="/" class="logo">
+      <span class="logo-mark">et</span><span class="logo-rest">shop</span>
+    </a>
+
+    <div class="buscador">
+      <svg class="icono-buscar" viewBox="0 0 24 24" width="18" height="18">
+        <path fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z"/>
+      </svg>
+      <input
+        type="text"
+        placeholder="Buscar celular, portátil, marca..."
+        [(ngModel)]="texto"
+        (ngModelChange)="onInput()">
+    </div>
+  </div>
+
+  <nav class="categorias">
+    <button
+      class="chip"
+      [class.activo]="tipoActivo === ''"
+      (click)="seleccionarTipo('')">
+      Todos
+    </button>
+    <button
+      class="chip"
+      [class.activo]="tipoActivo === 'celular'"
+      (click)="seleccionarTipo('celular')">
+      Celulares
+    </button>
+    <button
+      class="chip"
+      [class.activo]="tipoActivo === 'portatil'"
+      (click)="seleccionarTipo('portatil')">
+      Portátiles
+    </button>
+  </nav>
+</header>
