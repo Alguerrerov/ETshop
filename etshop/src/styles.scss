@@ -1,1 +1,48 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap');
+
+:root {
+  --color-fondo: #F7F8FA;
+  --color-superficie: #FFFFFF;
+  --color-texto: #12131A;
+  --color-texto-secundario: #5B6172;
+  --color-borde: #E4E7EC;
+  --color-acento: #2851E3;
+  --color-acento-hover: #1E3FBD;
+  --color-precio: #B8720A;
+  --color-precio-fondo: #FFF3DD;
+
+  --fuente-titulo: 'Space Grotesk', sans-serif;
+  --fuente-texto: 'Inter', sans-serif;
+  --fuente-mono: 'JetBrains Mono', monospace;
+
+  --radio: 10px;
+  --sombra: 0 1px 3px rgba(18, 19, 26, 0.08);
+  --sombra-hover: 0 8px 20px rgba(18, 19, 26, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--color-fondo);
+  color: var(--color-texto);
+  font-family: var(--fuente-texto);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: var(--fuente-titulo);
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+input, select, button {
+  font-family: var(--fuente-texto);
+}

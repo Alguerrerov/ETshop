@@ -14,6 +14,16 @@
         [(ngModel)]="texto"
         (ngModelChange)="onInput()">
     </div>
+
+    <div class="sesion">
+      <ng-container *ngIf="usuario$ | async as usuario; else sinSesion">
+        <span class="saludo">Hola, {{ usuario.nombre.split(' ')[0] }}</span>
+        <button class="btn-salir" (click)="cerrarSesion()">Salir</button>
+      </ng-container>
+      <ng-template #sinSesion>
+        <a routerLink="/login" class="btn-login">Iniciar sesión</a>
+      </ng-template>
+    </div>
   </div>
 
   <nav class="categorias">

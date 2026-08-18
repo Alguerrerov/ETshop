@@ -1,0 +1,42 @@
+<div class="login-container">
+  <div class="login-card">
+    <a routerLink="/" class="logo">
+      <span class="logo-mark">et</span><span class="logo-rest">shop</span>
+    </a>
+
+    <h1>Inicia sesión</h1>
+    <p class="subtitulo">Accede a tu cuenta para comprar y dejar comentarios</p>
+
+    <form (ngSubmit)="onSubmit()">
+      <div class="campo">
+        <label>Correo electrónico</label>
+        <input
+          type="email"
+          placeholder="tucorreo@ejemplo.com"
+          [(ngModel)]="correo"
+          name="correo">
+      </div>
+
+      <div class="campo">
+        <label>Contraseña</label>
+        <input
+          type="password"
+          placeholder="••••••••"
+          [(ngModel)]="contrasena"
+          name="contrasena">
+      </div>
+
+      <p class="mensaje-error" *ngIf="mensajeError">{{ mensajeError }}</p>
+
+      <button type="submit" [disabled]="cargando">
+        {{ cargando ? 'Ingresando...' : 'Iniciar sesión' }}
+      </button>
+    </form>
+
+    <p class="ayuda-demo">
+      Demo: <strong>testeo&#64;etshop.com</strong> / <strong>123456</strong>
+    </p>
+
+    <a routerLink="/" class="volver">← Volver a la tienda</a>
+  </div>
+</div>

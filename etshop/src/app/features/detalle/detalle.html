@@ -37,16 +37,75 @@
         ⭐ {{ dispositivo.calificacion }}
       </div>
 
+      <p class="descripcion">{{ dispositivo.descripcion }}</p>
+
       <p class="precio">{{ dispositivo.precio | currency:'COP':'symbol-narrow':'1.0-0' }}</p>
       <p class="fecha">Lanzamiento: {{ dispositivo.fechaLanzamiento | date:'d MMMM yyyy' }}</p>
 
-      <button class="btn-comprar">Agregar al carrito</button>
+      <!-- Selector de color -->
+      <div class="selector-bloque" *ngIf="dispositivo.colores.length > 1; else colorUnico">
+        <label>Color: <strong>{{ colorSeleccionado }}</strong></label>
+        <div class="opciones-color">
+          <button
+            *ngFor="let color of dispositivo.colores"
+            class="color-btn"
+            [class.activo]="color === colorSeleccionado"
+            (click)="seleccionarColor(color)">
+            {{ color }}
+          </button>
+        </div>
+      </div>
+      <ng-template #colorUnico>
+        <div class="selector-bloque" *ngIf="dispositivo.colores.length === 1">
+          <label>Color: <strong>{{ dispositivo.colores[0] }}</strong></label>
+        </div>
+      </ng-template>
 
-      <section class="resena">
-        <h3>Reseña</h3>
-        <p>{{ dispositivo.resena}}</p>
-      </section>
+      <!-- Selector de cantidad -->
+      <div class="selector-bloque">
+        <label>Cantidad</label>
+        <div class="selector-cantidad">
+          <button (click)="disminuirCantidad()" [disabled]="cantidad <= 1">−</button>
+          <span>{{ cantidad }}</span>
+          <button (click)="aumentarCantidad(dispositivo.stock)" [disabled]="cantidad >= dispositivo.stock">+</button>
+        </div>
+        <p class="stock-info" [class.stock-bajo]="dispositivo.stock <= 5">
+          {{ dispositivo.stock }} unidades disponibles
+        </p>
+      </div>
 
+      <!-- Botones de acción -->
+      <div class="botones-accion">
+        <button class="btn-comprar-ya">Comprar ya</button>
+        <button class="btn-agregar-carrito">Agregar al carrito</button>
+      </div>
+
+      <!-- Info de envío -->
+      <div class="info-envio">
+        <div class="envio-item">
+          <span class="icono">🚚</span>
+          <div>
+            <strong>Envío gratis</strong>
+            <p>Llega entre 2 y 4 días hábiles</p>
+          </div>
+        </div>
+        <div class="envio-item">
+          <span class="icono">↩️</span>
+          <div>
+            <strong>Devolución gratuita</strong>
+            <p>Tienes 30 días para devoluciones</p>
+          </div>
+        </div>
+        <div class="envio-item">
+          <span class="icono">🛡️</span>
+          <div>
+            <strong>Garantía oficial</strong>
+            <p>12 meses con el fabricante</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Especificaciones -->
       <section class="especificaciones">
         <h3>Especificaciones técnicas</h3>
         <dl>
@@ -75,6 +134,26 @@
     </div>
 
   </div>
+
+  <!-- Reseña + Comentarios  -->
+<section class="seccion-resena-comentarios">
+  <h2>Reseña y opiniones</h2>
+  <div class="resena-destacada">
+    <p>{{ dispositivo.resena }}</p>
+  </div>
+  <app-comentarios [dispositivoId]="dispositivo.id"></app-comentarios>
+</section>
+  <!-- Sugerencias  -->
+<section class="seccion-sugerencias" *ngIf="(sugerencias$ | async) as sugerencias">
+  <h2 *ngIf="sugerencias.length > 0">También te puede interesar</h2>
+
+  <div class="grid-sugerencias" *ngIf="sugerencias.length > 0">
+    <app-product-card
+      *ngFor="let s of sugerencias"
+      [dispositivo]="s">
+    </app-product-card>
+  </div>
+</section>
 </div>
 
 <ng-template #cargando>

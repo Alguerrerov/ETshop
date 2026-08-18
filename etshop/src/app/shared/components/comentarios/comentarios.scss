@@ -1,0 +1,127 @@
+.comentarios-container {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 40px;
+
+  @media (max-width: 800px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Lista de comentarios ---------- */
+
+.contador {
+  font-size: 0.85rem;
+  color: var(--color-texto-secundario);
+  margin: 0 0 16px;
+}
+
+.comentario {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--color-borde);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.comentario-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.usuario {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.estrellas {
+  color: #F5A623;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.comentario-texto {
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--color-texto);
+  margin: 0 0 6px;
+}
+
+.comentario-fecha {
+  font-size: 0.75rem;
+  color: var(--color-texto-secundario);
+}
+
+.sin-comentarios {
+  font-size: 0.88rem;
+  color: var(--color-texto-secundario);
+  font-style: italic;
+}
+
+/* ---------- Formulario ---------- */
+
+.form-comentario {
+  background: var(--color-fondo);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  padding: 20px;
+  height: fit-content;
+
+  h4 {
+    font-size: 0.95rem;
+    margin: 0 0 14px;
+  }
+
+  input, textarea {
+    width: 100%;
+    border: 1px solid var(--color-borde);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 0.85rem;
+    font-family: var(--fuente-texto);
+    color: var(--color-texto);
+    background: var(--color-superficie);
+    margin-bottom: 12px;
+    resize: none;
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-acento);
+    }
+  }
+
+  button {
+    width: 100%;
+    background: var(--color-acento);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 11px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease;
+
+    &:hover {
+      background: var(--color-acento-hover);
+    }
+  }
+}
+
+.selector-estrellas {
+  margin-bottom: 12px;
+}
+
+.estrella-input {
+  font-size: 1.4rem;
+  color: var(--color-borde);
+  cursor: pointer;
+  transition: color 0.1s ease;
+
+  &.activa {
+    color: #F5A623;
+  }
+}

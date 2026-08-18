@@ -1,0 +1,55 @@
+<div class="comentarios-container">
+
+  <!-- Lista de comentarios -->
+  <div class="lista-comentarios" *ngIf="comentarios$ | async as comentarios">
+    <p class="contador" *ngIf="comentarios.length > 0">
+      {{ comentarios.length }} comentario{{ comentarios.length === 1 ? '' : 's' }}
+    </p>
+
+    <div class="comentario" *ngFor="let c of comentarios">
+      <div class="comentario-header">
+        <span class="usuario">{{ c.usuario }}</span>
+        <span class="estrellas">
+          <ng-container *ngFor="let n of [1,2,3,4,5]">
+            {{ n <= c.calificacion ? '★' : '☆' }}
+          </ng-container>
+        </span>
+      </div>
+      <p class="comentario-texto">{{ c.texto }}</p>
+      <span class="comentario-fecha">{{ c.fecha | date:'d MMM yyyy' }}</span>
+    </div>
+
+    <p class="sin-comentarios" *ngIf="comentarios.length === 0">
+      Aún no hay comentarios. ¡Sé el primero en opinar!
+    </p>
+  </div>
+
+  <!-- Formulario para nuevo comentario -->
+  <div class="form-comentario">
+    <h4>Deja tu comentario</h4>
+
+    <input
+      type="text"
+      placeholder="Tu nombre"
+      [(ngModel)]="nombreNuevo">
+
+    <div class="selector-estrellas">
+      <span
+        *ngFor="let n of [1,2,3,4,5]"
+        class="estrella-input"
+        [class.activa]="n <= calificacionNueva"
+        (click)="calificacionNueva = n">
+        ★
+      </span>
+    </div>
+
+    <textarea
+      placeholder="Escribe tu opinión sobre este producto..."
+      rows="3"
+      [(ngModel)]="textoNuevo">
+    </textarea>
+
+    <button (click)="publicarComentario()">Publicar comentario</button>
+  </div>
+
+</div>

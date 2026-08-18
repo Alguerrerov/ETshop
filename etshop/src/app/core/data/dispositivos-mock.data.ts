@@ -8,8 +8,8 @@ export const DISPOSITIVOS_MOCK: Dispositivo[] = [
     tipo: 'celular',
     fechaLanzamiento: '2025-11-01',
     precio: 4500000,
-    imagenPrincipal: 'https://picsum.photos/seed/1/400/400',
-    galeria: ['https://picsum.photos/seed/1a/400/400', 'https://picsum.photos/seed/1b/400/400'],
+    imagenPrincipal: 'https://exitocol.vtexassets.com/arquivos/ids/34418977/Celular-SAMSUNG-S25-ULTRA-256-GB-12-GB-RAM-NEGRO-GALAXY-WATCH7-40MM-BT-3656370_c.jpg?v=639211604502300000',
+    galeria: ['https://e00-xlk-ue-marca-mx.uecdn.es/uploads/2026/06/16/17374063550820.jpeg', 'https://i.blogs.es/158281/samsung-galaxy-s25-ultra/650_1200.jpeg'],
     especificaciones: {
       ram: '12GB',
       almacenamiento: '256GB',
@@ -19,7 +19,9 @@ export const DISPOSITIVOS_MOCK: Dispositivo[] = [
     },
     descripcion: 'El Galaxy S25 Ultra es un teléfono inteligente de gama alta con una pantalla AMOLED de 6.8 pulgadas, una cámara de 108MP y un procesador Snapdragon 8 Gen 4.',
     resena: 'Excelente cámara y rendimiento, ideal para fotografía profesional.',
-    calificacion: 4.7
+    calificacion: 4.7,
+    colores: ['Negro Titanio', 'Gris Titanio', 'Violeta'],
+    stock: 12
   },
   {
     id: 2,
@@ -39,7 +41,9 @@ export const DISPOSITIVOS_MOCK: Dispositivo[] = [
     },
     descripcion: 'El iPhone 17 Pro es un teléfono inteligente de gama alta con una pantalla OLED de 6.3 pulgadas, una cámara de 12MP y un procesador A19 Pro.',
     resena: 'Rendimiento insuperable y el mejor ecosistema de apps.',
-    calificacion: 4.8
+    calificacion: 4.7,
+    colores: ['Negro Titanio', 'Gris Titanio', 'Violeta'],
+    stock: 12
   },
   {
     id: 3,
@@ -59,7 +63,9 @@ export const DISPOSITIVOS_MOCK: Dispositivo[] = [
     },
     descripcion: 'El ThinkPad X1 Carbon es un portátil empresarial liviano con una pantalla de 14 pulgadas y un procesador Intel Core Ultra 7.',
     resena: 'Portátil empresarial liviano, teclado excelente para programar.',
-    calificacion: 4.6
+    calificacion: 4.7,
+    colores: ['Negro Titanio', 'Gris Titanio', 'Violeta'],
+    stock: 12
   },
   {
     id: 4,
@@ -80,7 +86,8 @@ export const DISPOSITIVOS_MOCK: Dispositivo[] = [
     descripcion: 'El MacBook Air M4 es un portátil ultraligero con una pantalla Liquid Retina de 13.6 pulgadas y un procesador Apple M4.',
     resena: 'Silencioso, liviano y con una batería que dura todo el día.',
     calificacion: 4.9,
-
+    colores: ['Negro Titanio', 'Gris Titanio', 'Violeta'],
+    stock: 12
   },
   {
     id: 5,
@@ -100,7 +107,9 @@ export const DISPOSITIVOS_MOCK: Dispositivo[] = [
     },
     descripcion: 'El Redmi Note 14 Pro es un teléfono inteligente de gama media con una pantalla AMOLED de 6.6 pulgadas, una cámara de 108MP y un procesador Snapdragon 7s.',
     resena: 'Muy buena relación precio-calidad para uso diario.',
-    calificacion: 4.3
+    calificacion: 4.3,
+    colores: ['Negro Titanio', 'Gris Titanio', 'Violeta'],
+    stock: 12
   },
   {
     id: 6,
@@ -120,6 +129,8 @@ export const DISPOSITIVOS_MOCK: Dispositivo[] = [
     },
     descripcion: 'El ROG Strix G16 es un portátil gamer de alto rendimiento con una pantalla de 16 pulgadas a 240Hz y un procesador Intel Core i9.',
     resena: 'Portátil gamer potente, ideal para juegos exigentes.',
-    calificacion: 4.5
+    calificacion: 4.5,
+    colores: ['Negro Titanio', 'Gris Titanio', 'Violeta'],
+    stock: 12
   }
 ];

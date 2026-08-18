@@ -130,25 +130,7 @@
   margin: 0 0 20px;
 }
 
-.btn-comprar {
-  width: 100%;
-  background: var(--color-acento);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  padding: 14px 20px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.15s ease;
-  margin-bottom: 32px;
-
-  &:hover {
-    background: var(--color-acento-hover);
-  }
-}
-
-.resena, .especificaciones {
+.especificaciones {
   margin-bottom: 28px;
 
   h3 {
@@ -156,13 +138,6 @@
     margin-bottom: 12px;
     padding-bottom: 10px;
     border-bottom: 1px solid var(--color-borde);
-  }
-
-  p {
-    font-size: 0.92rem;
-    line-height: 1.6;
-    color: var(--color-texto-secundario);
-    margin: 0;
   }
 }
 
@@ -196,4 +171,231 @@
   text-align: center;
   padding: 80px 0;
   color: var(--color-texto-secundario);
+}
+
+/* ---------- Descripción ---------- */
+
+.descripcion {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--color-texto-secundario);
+  margin: 4px 0 18px;
+}
+
+/* ---------- Selectores (color / cantidad) ---------- */
+
+.selector-bloque {
+  margin-bottom: 20px;
+
+  label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--color-texto-secundario);
+    margin-bottom: 10px;
+
+    strong {
+      color: var(--color-texto);
+    }
+  }
+}
+
+.opciones-color {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.color-btn {
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--color-borde);
+  background: var(--color-superficie);
+  color: var(--color-texto);
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    border-color: var(--color-acento);
+  }
+
+  &.activo {
+    background: var(--color-acento);
+    border-color: var(--color-acento);
+    color: white;
+  }
+}
+
+.selector-cantidad {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--color-borde);
+  border-radius: 8px;
+  overflow: hidden;
+  width: fit-content;
+
+  button {
+    width: 38px;
+    height: 38px;
+    border: none;
+    background: var(--color-fondo);
+    font-size: 1.1rem;
+    cursor: pointer;
+    color: var(--color-texto);
+    transition: background 0.15s ease;
+
+    &:hover:not(:disabled) {
+      background: var(--color-borde);
+    }
+
+    &:disabled {
+      color: var(--color-borde);
+      cursor: not-allowed;
+    }
+  }
+
+  span {
+    width: 44px;
+    text-align: center;
+    font-family: var(--fuente-mono);
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+}
+
+.stock-info {
+  font-size: 0.78rem;
+  color: var(--color-texto-secundario);
+  margin: 8px 0 0;
+
+  &.stock-bajo {
+    color: #C4491E;
+    font-weight: 600;
+  }
+}
+
+/* ---------- Botones de acción ---------- */
+
+.botones-accion {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.btn-comprar-ya {
+  width: 100%;
+  background: var(--color-precio);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 14px 20px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.btn-agregar-carrito {
+  width: 100%;
+  background: var(--color-superficie);
+  color: var(--color-acento);
+  border: 1.5px solid var(--color-acento);
+  border-radius: 10px;
+  padding: 14px 20px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: var(--color-fondo);
+  }
+}
+
+/* ---------- Info de envío ---------- */
+
+.info-envio {
+  background: var(--color-fondo);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.envio-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+
+  .icono {
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+
+  strong {
+    display: block;
+    font-size: 0.85rem;
+    margin-bottom: 2px;
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.78rem;
+    color: var(--color-texto-secundario);
+  }
+}
+
+/*reseña y comentarios*/
+.seccion-resena-comentarios {
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid var(--color-borde);
+
+  h2 {
+    font-size: 1.3rem;
+    margin-bottom: 18px;
+  }
+}
+
+.resena-destacada {
+  background: var(--color-precio-fondo);
+  border-left: 3px solid var(--color-precio);
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin-bottom: 28px;
+
+  p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--color-texto);
+    font-style: italic;
+  }
+}
+
+.seccion-sugerencias {
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid var(--color-borde);
+
+  h2 {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+  }
+}
+
+.grid-sugerencias {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
 }

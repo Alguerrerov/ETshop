@@ -1,0 +1,134 @@
+.login-container {
+  min-height: calc(100vh - 200px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background: var(--color-fondo);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 380px;
+  background: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  padding: 36px 32px;
+  box-shadow: var(--sombra);
+  text-align: center;
+}
+
+.logo {
+  display: inline-block;
+  font-family: var(--fuente-titulo);
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+
+  .logo-mark {
+    color: var(--color-acento);
+  }
+
+  .logo-rest {
+    color: var(--color-texto);
+  }
+}
+
+h1 {
+  font-size: 1.4rem;
+  margin-bottom: 6px;
+}
+
+.subtitulo {
+  font-size: 0.85rem;
+  color: var(--color-texto-secundario);
+  margin: 0 0 28px;
+}
+
+form {
+  text-align: left;
+}
+
+.campo {
+  margin-bottom: 16px;
+
+  label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--color-texto-secundario);
+    margin-bottom: 6px;
+  }
+
+  input {
+    width: 100%;
+    border: 1px solid var(--color-borde);
+    border-radius: 8px;
+    padding: 11px 14px;
+    font-size: 0.9rem;
+    color: var(--color-texto);
+    background: var(--color-fondo);
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-acento);
+      background: var(--color-superficie);
+    }
+  }
+}
+
+.mensaje-error {
+  font-size: 0.82rem;
+  color: #C4491E;
+  background: #FDF1EC;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin: 0 0 16px;
+}
+
+button[type="submit"] {
+  width: 100%;
+  background: var(--color-acento);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+
+  &:hover:not(:disabled) {
+    background: var(--color-acento-hover);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.ayuda-demo {
+  font-size: 0.75rem;
+  color: var(--color-texto-secundario);
+  background: var(--color-fondo);
+  border-radius: 6px;
+  padding: 10px;
+  margin: 20px 0 0;
+
+  strong {
+    font-family: var(--fuente-mono);
+    color: var(--color-texto);
+  }
+}
+
+.volver {
+  display: inline-block;
+  margin-top: 18px;
+  font-size: 0.82rem;
+  color: var(--color-texto-secundario);
+
+  &:hover {
+    color: var(--color-acento);
+  }
+}

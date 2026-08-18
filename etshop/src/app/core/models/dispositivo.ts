@@ -1,4 +1,4 @@
-export type TipoDispositivo = 'celular' | 'portatil' | 'tablet' | 'smartwatch' | 'auriculares' | 'consola' | 'televisor' | 'cámara' | 'altavoz' | 'otros';
+export type TipoDispositivo = 'celular' | 'portatil';
 
 export interface Especificaciones {
   ram: string;
@@ -21,6 +21,8 @@ export interface Dispositivo {
   descripcion: string;
   resena: string;
   calificacion: number;
+  colores: string[];
+  stock: number;
 }
 
 export interface FiltrosDispositivo {
@@ -31,4 +33,11 @@ export interface FiltrosDispositivo {
   rangoPrecio: 'todos' | 'bajo' | 'medio' | 'alto';
 }
 
-
+export interface Comentario {
+  id: number;
+  dispositivoId: number;
+  usuario: string;
+  calificacion: number;
+  texto: string;
+  fecha: string;
+}
