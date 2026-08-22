@@ -23,6 +23,7 @@ export interface Dispositivo {
   calificacion: number;
   colores: string[];
   stock: number;
+  vendedor: Vendedor;
 }
 
 export interface FiltrosDispositivo {
@@ -40,4 +41,12 @@ export interface Comentario {
   calificacion: number;
   texto: string;
   fecha: string;
+}
+
+export interface Vendedor {
+  nombre: string;
+  calificacion: number;
+  ventasCompletadas: number;
+  ubicacion: string;
+  esOficial: boolean;
 }

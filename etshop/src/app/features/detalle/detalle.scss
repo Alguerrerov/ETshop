@@ -399,3 +399,83 @@
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 20px;
 }
+
+.info-vendedor {
+  background: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  padding: 16px 18px;
+  margin-bottom: 28px;
+}
+
+.vendedor-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.vendedor-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-acento);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--fuente-titulo);
+  font-weight: 700;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.vendedor-nombre {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.badge-oficial {
+  font-family: var(--fuente-mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  background: var(--color-precio-fondo);
+  color: var(--color-precio);
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.vendedor-ubicacion {
+  font-size: 0.78rem;
+  color: var(--color-texto-secundario);
+  margin-top: 2px;
+}
+
+.vendedor-stats {
+  display: flex;
+  gap: 24px;
+  padding-top: 14px;
+  border-top: 1px solid var(--color-borde);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  .valor {
+    font-family: var(--fuente-mono);
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .etiqueta {
+    font-size: 0.72rem;
+    color: var(--color-texto-secundario);
+  }
+}

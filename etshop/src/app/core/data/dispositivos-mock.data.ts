@@ -21,8 +21,10 @@ export const DISPOSITIVOS_MOCK: Dispositivo[] = [
     resena: 'Excelente cámara y rendimiento, ideal para fotografía profesional.',
     calificacion: 4.7,
     colores: ['Negro Titanio', 'Gris Titanio', 'Violeta'],
-    stock: 12
+    stock: 12,
+    vendedor: {nombre: 'TecnoStore Colombia',  calificacion: 4.8,   ventasCompletadas: 3240,   ubicacion: 'Bogotá, Colombia',   esOficial: true}
   },
+
   {
     id: 2,
     nombre: 'iPhone 17 Pro',
@@ -43,7 +45,8 @@ export const DISPOSITIVOS_MOCK: Dispositivo[] = [
     resena: 'Rendimiento insuperable y el mejor ecosistema de apps.',
     calificacion: 4.7,
     colores: ['Negro Titanio', 'Gris Titanio', 'Violeta'],
-    stock: 12
+    stock: 12,
+    vendedor: { nombre: 'Apple Store Oficial', calificacion: 4.9, ventasCompletadas: 8120, ubicacion: 'Medellín, Colombia', esOficial: true},
   },
   {
     id: 3,
@@ -65,7 +68,8 @@ export const DISPOSITIVOS_MOCK: Dispositivo[] = [
     resena: 'Portátil empresarial liviano, teclado excelente para programar.',
     calificacion: 4.7,
     colores: ['Negro Titanio', 'Gris Titanio', 'Violeta'],
-    stock: 12
+    stock: 12,
+    vendedor: { nombre: 'Lenovo Business Partners', calificacion: 4.6, ventasCompletadas: 1150, ubicacion: 'Bogotá, Colombia', esOficial: true},
   },
   {
     id: 4,
@@ -87,7 +91,8 @@ export const DISPOSITIVOS_MOCK: Dispositivo[] = [
     resena: 'Silencioso, liviano y con una batería que dura todo el día.',
     calificacion: 4.9,
     colores: ['Negro Titanio', 'Gris Titanio', 'Violeta'],
-    stock: 12
+    stock: 12,
+    vendedor: { nombre: 'Apple Store Oficial', calificacion: 4.9, ventasCompletadas: 8120, ubicacion: 'Medellín, Colombia', esOficial: true},
   },
   {
     id: 5,
@@ -109,7 +114,8 @@ export const DISPOSITIVOS_MOCK: Dispositivo[] = [
     resena: 'Muy buena relación precio-calidad para uso diario.',
     calificacion: 4.3,
     colores: ['Negro Titanio', 'Gris Titanio', 'Violeta'],
-    stock: 12
+    stock: 12,
+    vendedor: {   nombre: 'MegaCel Distribuciones',  calificacion: 4.3,  ventasCompletadas: 5670,  ubicacion: 'Cali, Colombia',  esOficial: false},
   },
   {
     id: 6,
@@ -131,6 +137,7 @@ export const DISPOSITIVOS_MOCK: Dispositivo[] = [
     resena: 'Portátil gamer potente, ideal para juegos exigentes.',
     calificacion: 4.5,
     colores: ['Negro Titanio', 'Gris Titanio', 'Violeta'],
-    stock: 12
-  }
+    stock: 12,
+    vendedor: { nombre: 'GamerZone Colombia', calificacion: 4.7, ventasCompletadas: 890, ubicacion: 'Bogotá, Colombia', esOficial: false},
+    }
 ];

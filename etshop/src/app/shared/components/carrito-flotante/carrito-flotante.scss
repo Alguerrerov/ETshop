@@ -1,0 +1,43 @@
+.carrito-flotante {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--color-acento);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(40, 81, 227, 0.4);
+  z-index: 100;
+  transition: transform 0.15s ease;
+
+  &:hover {
+    transform: scale(1.06);
+  }
+}
+
+.contador {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: var(--color-precio);
+  color: white;
+  font-family: var(--fuente-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+  border: 2px solid var(--color-superficie);
+
+  &.visible {
+    display: flex;
+  }
+}

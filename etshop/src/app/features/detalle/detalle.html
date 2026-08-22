@@ -77,7 +77,9 @@
       <!-- Botones de acción -->
       <div class="botones-accion">
         <button class="btn-comprar-ya">Comprar ya</button>
-        <button class="btn-agregar-carrito">Agregar al carrito</button>
+        <button class="btn-agregar-carrito" (click)="agregarAlCarrito(dispositivo)">
+  {{ mensajeAgregado ? '✓ Agregado al carrito' : 'Agregar al carrito' }}
+</button>
       </div>
 
       <!-- Info de envío -->
@@ -101,6 +103,31 @@
           <div>
             <strong>Garantía oficial</strong>
             <p>12 meses con el fabricante</p>
+          </div>
+        </div>
+      </div>
+
+            <!-- Información del vendedor -->
+      <div class="info-vendedor">
+        <div class="vendedor-header">
+          <div class="vendedor-avatar">{{ dispositivo.vendedor.nombre.charAt(0) }}</div>
+          <div>
+            <div class="vendedor-nombre">
+              {{ dispositivo.vendedor.nombre }}
+              <span class="badge-oficial" *ngIf="dispositivo.vendedor.esOficial">Oficial</span>
+            </div>
+            <div class="vendedor-ubicacion">{{ dispositivo.vendedor.ubicacion }}</div>
+          </div>
+        </div>
+
+        <div class="vendedor-stats">
+          <div class="stat">
+            <span class="valor">⭐ {{ dispositivo.vendedor.calificacion }}</span>
+            <span class="etiqueta">Calificación</span>
+          </div>
+          <div class="stat">
+            <span class="valor">{{ dispositivo.vendedor.ventasCompletadas | number }}</span>
+            <span class="etiqueta">Ventas</span>
           </div>
         </div>
       </div>

@@ -1,0 +1,52 @@
+<div class="carrito-container">
+  <h1>Tu carrito</h1>
+
+  <ng-container *ngIf="items$ | async as items">
+
+    <div class="carrito-vacio" *ngIf="items.length === 0">
+      <p>Tu carrito está vacío.</p>
+      <a routerLink="/" class="btn-volver-tienda">Ir a la tienda</a>
+    </div>
+
+    <div class="carrito-contenido" *ngIf="items.length > 0">
+
+      <div class="lista-items">
+        <div class="item-carrito" *ngFor="let item of items">
+          <img [src]="item.dispositivo.imagenPrincipal" [alt]="item.dispositivo.nombre">
+
+          <div class="item-info">
+            <span class="item-marca">{{ item.dispositivo.marca }}</span>
+            <h3>{{ item.dispositivo.nombre }}</h3>
+            <p class="item-color">Color: {{ item.color }}</p>
+            <p class="item-precio-unidad">{{ item.dispositivo.precio | currency:'COP':'symbol-narrow':'1.0-0' }} c/u</p>
+          </div>
+
+          <div class="item-cantidad">
+            <button (click)="disminuir(item.dispositivo.id, item.color, item.cantidad)" [disabled]="item.cantidad <= 1">−</button>
+            <span>{{ item.cantidad }}</span>
+            <button (click)="aumentar(item.dispositivo.id, item.color, item.cantidad, item.dispositivo.stock)" [disabled]="item.cantidad >= item.dispositivo.stock">+</button>
+          </div>
+
+          <div class="item-subtotal">
+            {{ (item.dispositivo.precio * item.cantidad) | currency:'COP':'symbol-narrow':'1.0-0' }}
+          </div>
+
+          <button class="item-quitar" (click)="quitar(item.dispositivo.id, item.color)" aria-label="Quitar">
+            ✕
+          </button>
+        </div>
+      </div>
+
+      <div class="resumen-carrito">
+        <h3>Resumen del pedido</h3>
+        <div class="resumen-linea">
+          <span>Total</span>
+          <strong>{{ (totalPrecio$ | async) | currency:'COP':'symbol-narrow':'1.0-0' }}</strong>
+        </div>
+        <button class="btn-finalizar">Finalizar compra</button>
+        <a routerLink="/" class="seguir-comprando">← Seguir comprando</a>
+      </div>
+
+    </div>
+  </ng-container>
+</div>

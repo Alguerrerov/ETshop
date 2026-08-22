@@ -6,6 +6,7 @@ import { DispositivoService } from '../../core/service/dispositivo.service';
 import { Dispositivo } from '../../core/models/dispositivo';
 import { Comentarios } from '../../shared/components/comentarios/comentarios';
 import { ProductCardComponent } from '../../shared/components/product-card/product-card.component';
+import { CarritoService } from '../../core/service/carrito';
 
 
 @Component({
@@ -18,6 +19,7 @@ import { ProductCardComponent } from '../../shared/components/product-card/produ
 export class Detalle {
   private route = inject(ActivatedRoute);
   private dispositivoService = inject(DispositivoService);
+  private carritoService = inject(CarritoService);
 
   imagenActiva = '';
   colorSeleccionado = '';
@@ -67,6 +69,15 @@ export class Detalle {
       this.cantidad--;
     }
   }
+
+  /** */
+  mensajeAgregado = false;
+
+agregarAlCarrito(dispositivo: Dispositivo): void {
+  this.carritoService.agregarItem(dispositivo, this.colorSeleccionado, this.cantidad);
+  this.mensajeAgregado = true;
+  setTimeout(() => this.mensajeAgregado = false, 2000);
+}
 
 
 }
