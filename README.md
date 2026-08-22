@@ -75,14 +75,14 @@ ROL, DIRECCION	No implementados
 Esta simplificación es esperada en la etapa actual del proyecto.
 
 Pendientes
-Desarrollo del back-end (API REST) conforme al diagrama relacional
-Reemplazo del repositorio mock por una implementación HTTP
-Persistencia del carrito asociada al usuario autenticado
-Flujo de checkout: dirección, método de pago, confirmación de pedido
-Sistema de roles (usuario, vendedor, administrador, soporte)
-Registro de nuevos usuarios
-Persistencia de comentarios
-Ejecución del proyecto
+Desarrollo del back-end (API REST) conforme al diagrama relacional,
+Reemplazo del repositorio mock por una implementación HTTP,
+Persistencia del carrito asociada al usuario autenticado,
+Flujo de checkout: dirección, método de pago, confirmación de pedido,
+Sistema de roles (usuario, vendedor, administrador, soporte),
+Registro de nuevos usuarios,
+Persistencia de comentarios.
+Ejecución del proyecto:
 bash
 npm install
 ng serve -o
