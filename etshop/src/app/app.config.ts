@@ -2,6 +2,7 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 
 import { routes } from './app.routes';
+import { provideIonicAngular } from '@ionic/angular';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -9,8 +10,9 @@ export const appConfig: ApplicationConfig = {
     provideRouter(
       routes,
       withInMemoryScrolling({
-        scrollPositionRestoration: 'top'
-      })
-    )
-  ]
+        scrollPositionRestoration: 'top',
+      }),
+    ),
+    provideIonicAngular({}),
+  ],
 };
