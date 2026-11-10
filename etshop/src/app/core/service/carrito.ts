@@ -1,12 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 import { ItemCarrito } from '../models/carrito';
 import { Dispositivo } from '../models/dispositivo';
+import { AlmacenamientoService } from './almacenamiento';
 
-
+const CLAVE_CARRITO = 'etshop_carrito';
 
 @Injectable({ providedIn: 'root' })
 export class CarritoService {
+  private almacenamiento = inject(AlmacenamientoService);
 
   private itemsSubject = new BehaviorSubject<ItemCarrito[]>([]);
   items$ = this.itemsSubject.asObservable();
@@ -19,6 +21,26 @@ export class CarritoService {
     map(items => items.reduce((total, item) => total + (item.dispositivo.precio * item.cantidad), 0))
   );
 
+  /** Se resuelve cuando el carrito guardado ya fue cargado. */
+  readonly listo: Promise<void>;
+
+  constructor() {
+    this.listo = this.cargar();
+  }
+
+  private async cargar(): Promise<void> {
+    const guardado = await this.almacenamiento.leer<ItemCarrito[]>(CLAVE_CARRITO);
+    if (Array.isArray(guardado) && this.itemsSubject.value.length === 0) {
+      this.itemsSubject.next(guardado);
+    }
+  }
+
+  /** Emite la nueva lista y la guarda en el almacenamiento local. */
+  private actualizar(items: ItemCarrito[]): void {
+    this.itemsSubject.next(items);
+    void this.almacenamiento.guardar(CLAVE_CARRITO, items);
+  }
+
   agregarItem(dispositivo: Dispositivo, color: string, cantidad: number): void {
     const items = this.itemsSubject.value;
 
@@ -29,38 +51,35 @@ export class CarritoService {
 
     if (existente) {
       // Si ya existe, solo aumenta la cantidad
-      const actualizados = items.map(item =>
+      this.actualizar(items.map(item =>
         item === existente
           ? { ...item, cantidad: item.cantidad + cantidad }
           : item
-      );
-      this.itemsSubject.next(actualizados);
+      ));
     } else {
-      // Si no existe, su como item nuevo
-      this.itemsSubject.next([...items, { dispositivo, color, cantidad }]);
+      // Si no existe, se agrega como item nuevo
+      this.actualizar([...items, { dispositivo, color, cantidad }]);
     }
   }
 
   quitarItem(dispositivoId: number, color: string): void {
-    const items = this.itemsSubject.value.filter(
+    this.actualizar(this.itemsSubject.value.filter(
       item => !(item.dispositivo.id === dispositivoId && item.color === color)
-    );
-    this.itemsSubject.next(items);
+    ));
   }
 
   cambiarCantidad(dispositivoId: number, color: string, cantidad: number): void {
     if (cantidad < 1) {
       return;
     }
-    const items = this.itemsSubject.value.map(item =>
+    this.actualizar(this.itemsSubject.value.map(item =>
       item.dispositivo.id === dispositivoId && item.color === color
         ? { ...item, cantidad }
         : item
-    );
-    this.itemsSubject.next(items);
+    ));
   }
 
   vaciarCarrito(): void {
-    this.itemsSubject.next([]);
+    this.actualizar([]);
   }
 }
