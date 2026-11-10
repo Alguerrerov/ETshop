@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">etshop</string>
+    <string name="title_activity_main">etshop</string>
+    <string name="package_name">com.alguerrerov.etshop</string>
+    <string name="custom_url_scheme">com.alguerrerov.etshop</string>
+</resources>
