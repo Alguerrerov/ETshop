@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonBackButton } from '@ionic/angular';
 import { Observable, switchMap, tap, of } from 'rxjs';
 import { DispositivoService } from '../../core/service/dispositivo.service';
 import { Dispositivo } from '../../core/models/dispositivo';
@@ -12,7 +13,10 @@ import { CarritoService } from '../../core/service/carrito';
 @Component({
   selector: 'app-detalle',
   standalone: true,
-  imports: [CommonModule, RouterModule, Comentarios, ProductCardComponent],
+  imports: [
+    CommonModule, RouterModule, Comentarios, ProductCardComponent,
+    IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonBackButton,
+  ],
   templateUrl: './detalle.html',
   styleUrl: './detalle.scss'
 })

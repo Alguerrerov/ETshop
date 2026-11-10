@@ -1,3 +1,10 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Carrito</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
 <div class="carrito-container">
   <h1>Tu carrito</h1>
 
@@ -5,7 +12,7 @@
 
     <div class="carrito-vacio" *ngIf="items.length === 0">
       <p>Tu carrito está vacío.</p>
-      <a routerLink="/" class="btn-volver-tienda">Ir a la tienda</a>
+      <a routerLink="/tabs/home" class="btn-volver-tienda">Ir a la tienda</a>
     </div>
 
     <div class="carrito-contenido" *ngIf="items.length > 0">
@@ -44,9 +51,10 @@
           <strong>{{ (totalPrecio$ | async) | currency:'COP':'symbol-narrow':'1.0-0' }}</strong>
         </div>
         <button class="btn-finalizar">Finalizar compra</button>
-        <a routerLink="/" class="seguir-comprando">← Seguir comprando</a>
+        <a routerLink="/tabs/home" class="seguir-comprando">← Seguir comprando</a>
       </div>
 
     </div>
   </ng-container>
 </div>
+</ion-content>

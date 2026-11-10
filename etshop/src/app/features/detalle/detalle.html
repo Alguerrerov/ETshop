@@ -1,6 +1,14 @@
-<div class="detalle-container" *ngIf="dispositivo$ | async as dispositivo; else cargando">
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home" text="Volver"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalle</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-  <a routerLink="/" class="volver">← Volver al listado</a>
+<ion-content>
+<div class="detalle-container" *ngIf="dispositivo$ | async as dispositivo; else cargando">
 
   <div class="detalle-grid">
 
@@ -188,3 +196,4 @@
     <p>Cargando dispositivo...</p>
   </div>
 </ng-template>
+</ion-content>

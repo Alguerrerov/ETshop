@@ -1,3 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>etshop</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar
+      placeholder="Buscar celular, portátil, marca..."
+      [debounce]="300"
+      (ionInput)="onBuscar($event.detail.value)">
+    </ion-searchbar>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-segment [value]="tipoActivo" (ionChange)="onTipo($event.detail.value)">
+      <ion-segment-button value="todos"><ion-label>Todos</ion-label></ion-segment-button>
+      <ion-segment-button value="celular"><ion-label>Celulares</ion-label></ion-segment-button>
+      <ion-segment-button value="portatil"><ion-label>Portátiles</ion-label></ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
 <div class="home-container">
   <h2 class="section-title">Últimos lanzamientos</h2>
 
@@ -21,3 +42,4 @@
     <p>Cargando dispositivos...</p>
   </ng-template>
 </div>
+</ion-content>

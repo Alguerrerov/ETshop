@@ -1,12 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular';
 import { CarritoService } from '../../core/service/carrito';
 
 @Component({
   selector: 'app-carrito-page',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, IonHeader, IonToolbar, IonTitle, IonContent],
   templateUrl: './carrito.html',
   styleUrl: './carrito.scss'
 })

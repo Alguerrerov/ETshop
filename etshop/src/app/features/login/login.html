@@ -1,8 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Cuenta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="login-container" *ngIf="usuario$ | async as usuario; else formulario">
+    <div class="login-card">
+      <h1>Hola, {{ usuario.nombre }}</h1>
+      <p class="subtitulo">{{ usuario.correo }}</p>
+      <button type="button" (click)="cerrarSesion()">Cerrar sesión</button>
+    </div>
+  </div>
+
+  <ng-template #formulario>
 <div class="login-container">
   <div class="login-card">
-    <a routerLink="/" class="logo">
+    <span class="logo">
       <span class="logo-mark">et</span><span class="logo-rest">shop</span>
-    </a>
+    </span>
 
     <h1>Inicia sesión</h1>
     <p class="subtitulo">Accede a tu cuenta para comprar y dejar comentarios</p>
@@ -37,6 +53,8 @@
       Demo: <strong>testeo&#64;etshop.com</strong> / <strong>123456</strong>
     </p>
 
-    <a routerLink="/" class="volver">← Volver a la tienda</a>
+    <a routerLink="/tabs/home" class="volver">← Volver a la tienda</a>
   </div>
 </div>
+  </ng-template>
+</ion-content>
