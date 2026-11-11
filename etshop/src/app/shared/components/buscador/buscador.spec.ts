@@ -1,22 +1,16 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+import { BuscadorComponent } from './buscador';
+import { proveedoresDePrueba } from '../../../../testing/proveedores';
 
-import { Buscador } from './buscador';
-
-describe('Buscador', () => {
-  let component: Buscador;
-  let fixture: ComponentFixture<Buscador>;
-
-  beforeEach(async () => {
+describe('BuscadorComponent', () => {
+  it('se crea correctamente', async () => {
     await TestBed.configureTestingModule({
-      imports: [Buscador],
+      imports: [BuscadorComponent],
+      providers: proveedoresDePrueba(),
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Buscador);
-    component = fixture.componentInstance;
+    const fixture = TestBed.createComponent(BuscadorComponent);
     await fixture.whenStable();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(fixture.componentInstance).toBeTruthy();
   });
 });

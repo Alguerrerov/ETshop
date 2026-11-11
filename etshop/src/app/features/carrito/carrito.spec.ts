@@ -1,22 +1,16 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+import { CarritoPage } from './carrito';
+import { proveedoresDePrueba } from '../../../testing/proveedores';
 
-import { Carrito } from './carrito';
-
-describe('Carrito', () => {
-  let component: Carrito;
-  let fixture: ComponentFixture<Carrito>;
-
-  beforeEach(async () => {
+describe('CarritoPage', () => {
+  it('se crea correctamente', async () => {
     await TestBed.configureTestingModule({
-      imports: [Carrito],
+      imports: [CarritoPage],
+      providers: proveedoresDePrueba(),
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Carrito);
-    component = fixture.componentInstance;
+    const fixture = TestBed.createComponent(CarritoPage);
     await fixture.whenStable();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(fixture.componentInstance).toBeTruthy();
   });
 });

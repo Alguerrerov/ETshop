@@ -1,22 +1,17 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { TestBed } from '@angular/core/testing';
 import { Comentarios } from './comentarios';
+import { proveedoresDePrueba } from '../../../../testing/proveedores';
 
 describe('Comentarios', () => {
-  let component: Comentarios;
-  let fixture: ComponentFixture<Comentarios>;
-
-  beforeEach(async () => {
+  it('se crea correctamente', async () => {
     await TestBed.configureTestingModule({
       imports: [Comentarios],
+      providers: proveedoresDePrueba(),
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Comentarios);
-    component = fixture.componentInstance;
+    const fixture = TestBed.createComponent(Comentarios);
+    fixture.componentRef.setInput('dispositivoId', 1);
     await fixture.whenStable();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(fixture.componentInstance).toBeTruthy();
   });
 });
