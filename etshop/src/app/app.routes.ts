@@ -4,6 +4,8 @@ import { Home } from './features/home/home';
 import { Detalle } from './features/detalle/detalle';
 import { Login } from './features/login/login';
 import { CarritoPage } from './features/carrito/carrito';
+import { Checkout } from './features/checkout/checkout';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'tabs/home', pathMatch: 'full' },
@@ -18,5 +20,6 @@ export const routes: Routes = [
     ],
   },
   { path: 'detalle/:id', component: Detalle },
+  { path: 'checkout', component: Checkout, canActivate: [authGuard] },
   { path: '**', redirectTo: 'tabs/home' },
 ];

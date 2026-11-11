@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/carrito" text="Carrito"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Finalizar compra</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="checkout-container">
+
+    <ng-container *ngIf="!confirmado; else exito">
+      <p class="comprador" *ngIf="usuario$ | async as usuario">
+        Comprando como <strong>{{ usuario.correo }}</strong>
+      </p>
+
+      <ng-container *ngIf="items$ | async as items">
+        <div class="vacio" *ngIf="items.length === 0">
+          <p>No hay productos en el carrito.</p>
+          <button class="btn" (click)="volverATienda()">Ir a la tienda</button>
+        </div>
+
+        <div class="resumen" *ngIf="items.length > 0">
+          <div class="linea" *ngFor="let item of items">
+            <span>{{ item.cantidad }} × {{ item.dispositivo.nombre }} ({{ item.color }})</span>
+            <span>{{ (item.dispositivo.precio * item.cantidad) | currency:'COP':'symbol-narrow':'1.0-0' }}</span>
+          </div>
+
+          <div class="linea total">
+            <span>Total</span>
+            <strong>{{ (totalPrecio$ | async) | currency:'COP':'symbol-narrow':'1.0-0' }}</strong>
+          </div>
+
+          <button class="btn" (click)="confirmarPedido()">Confirmar pedido</button>
+          <p class="nota">Pedido de demostración: no se realiza ningún pago.</p>
+        </div>
+      </ng-container>
+    </ng-container>
+
+    <ng-template #exito>
+      <div class="exito">
+        <h2>¡Pedido confirmado!</h2>
+        <p>Gracias por tu compra. Este es un pedido de demostración.</p>
+        <button class="btn" (click)="volverATienda()">Volver a la tienda</button>
+      </div>
+    </ng-template>
+
+  </div>
+</ion-content>

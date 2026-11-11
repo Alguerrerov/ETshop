@@ -1,15 +1,19 @@
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, combineLatest, map } from 'rxjs';
+import { BehaviorSubject, Observable, combineLatest, firstValueFrom, map } from 'rxjs';
 import { IDispositivoRepository } from '../repositories/dispositivo-repository.interface';
-import { DispositivoMockRepository } from '../repositories/dispositivo-mock.repository';
+import { IComentarioRepository } from '../repositories/comentario-repository.interface';
+import { AlmacenamientoService } from './almacenamiento';
 import { Dispositivo, FiltrosDispositivo } from '../models/dispositivo';
 import { Comentario } from '../models/dispositivo';
-import { COMENTARIOS_MOCK } from '../data/comentarios-mock.data';
+
+const CLAVE_COMENTARIOS = 'etshop_comentarios_propios';
 
 @Injectable({ providedIn: 'root' })
 export class DispositivoService {
 
-  private repositorio: IDispositivoRepository = inject(DispositivoMockRepository);
+  private repositorio = inject(IDispositivoRepository);
+  private repositorioComentarios = inject(IComentarioRepository);
+  private almacenamiento = inject(AlmacenamientoService);
 
   private filtrosSubject = new BehaviorSubject<FiltrosDispositivo>({
   texto: '',
@@ -70,8 +74,28 @@ private cumpleRangoPrecio(precio: number, rango: FiltrosDispositivo['rangoPrecio
   }
 }
 
-private comentariosSubject = new BehaviorSubject<Comentario[]>(COMENTARIOS_MOCK);
+private comentariosBase: Comentario[] = [];
+private comentariosPropios: Comentario[] = [];
+private comentariosSubject = new BehaviorSubject<Comentario[]>([]);
 comentarios$ = this.comentariosSubject.asObservable();
+
+constructor() {
+  void this.cargarComentarios();
+}
+
+private async cargarComentarios(): Promise<void> {
+  const [base, propios] = await Promise.all([
+    firstValueFrom(this.repositorioComentarios.obtenerTodos()),
+    this.almacenamiento.leer<Comentario[]>(CLAVE_COMENTARIOS)
+  ]);
+  this.comentariosBase = base;
+  this.comentariosPropios = propios ?? [];
+  this.publicarComentarios();
+}
+
+private publicarComentarios(): void {
+  this.comentariosSubject.next([...this.comentariosPropios, ...this.comentariosBase]);
+}
 
 obtenerComentariosPorDispositivo(dispositivoId: number): Observable<Comentario[]> {
   return this.comentarios$.pipe(
@@ -80,8 +104,8 @@ obtenerComentariosPorDispositivo(dispositivoId: number): Observable<Comentario[]
 }
 
 agregarComentario(nuevoComentario: Omit<Comentario, 'id' | 'fecha'>): void {
-  const comentarios = this.comentariosSubject.value;
-  const nuevoId = Math.max(...comentarios.map(c => c.id), 0) + 1;
+  const todos = [...this.comentariosPropios, ...this.comentariosBase];
+  const nuevoId = Math.max(...todos.map(c => c.id), 0) + 1;
 
   const comentario: Comentario = {
     ...nuevoComentario,
@@ -89,7 +113,10 @@ agregarComentario(nuevoComentario: Omit<Comentario, 'id' | 'fecha'>): void {
     fecha: new Date().toISOString().split('T')[0]
   };
 
-  this.comentariosSubject.next([comentario, ...comentarios]);
+  // Los comentarios nuevos se guardan en el almacenamiento local del dispositivo
+  this.comentariosPropios = [comentario, ...this.comentariosPropios];
+  void this.almacenamiento.guardar(CLAVE_COMENTARIOS, this.comentariosPropios);
+  this.publicarComentarios();
 }
 
 obtenerSugerencias(dispositivoActual: Dispositivo): Observable<Dispositivo[]> {

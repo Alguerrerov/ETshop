@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular';
 import { CarritoService } from '../../core/service/carrito';
 
@@ -13,6 +13,7 @@ import { CarritoService } from '../../core/service/carrito';
 })
 export class CarritoPage {
   private carritoService = inject(CarritoService);
+  private router = inject(Router);
 
   items$ = this.carritoService.items$;
   totalPrecio$ = this.carritoService.totalPrecio$;
@@ -31,5 +32,10 @@ export class CarritoPage {
 
   quitar(dispositivoId: number, color: string): void {
     this.carritoService.quitarItem(dispositivoId, color);
+  }
+
+  finalizar(): void {
+    // El guard de /checkout pide iniciar sesión si hace falta
+    void this.router.navigate(['/checkout']);
   }
 }

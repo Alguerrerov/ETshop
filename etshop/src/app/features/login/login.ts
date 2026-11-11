@@ -35,13 +35,20 @@ export class Login {
     this.authService.login({ correo: this.correo, contrasena: this.contrasena }).subscribe({
       next: () => {
         this.cargando = false;
-        this.router.navigate(['/tabs/home']);
+        void this.router.navigateByUrl(this.destinoTrasLogin());
       },
       error: (err) => {
         this.cargando = false;
         this.mensajeError = err.message;
       }
     });
+  }
+
+  /** Ruta a la que volver tras iniciar sesión (la pone el guard en ?redirect=). */
+  private destinoTrasLogin(): string {
+    const destino = this.router.parseUrl(this.router.url).queryParams['redirect'];
+    const esRutaInterna = typeof destino === 'string' && destino.startsWith('/') && !destino.startsWith('//');
+    return esRutaInterna ? destino : '/tabs/home';
   }
 
   cerrarSesion(): void {

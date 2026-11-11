@@ -50,7 +50,7 @@
           <span>Total</span>
           <strong>{{ (totalPrecio$ | async) | currency:'COP':'symbol-narrow':'1.0-0' }}</strong>
         </div>
-        <button class="btn-finalizar">Finalizar compra</button>
+        <button class="btn-finalizar" (click)="finalizar()">Finalizar compra</button>
         <a routerLink="/tabs/home" class="seguir-comprando">← Seguir comprando</a>
       </div>
 

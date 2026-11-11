@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, Observable, delay, of, throwError } from 'rxjs';
-import { Usuario, CredencialesLogin } from '../models/usuario';
+import { BehaviorSubject, Observable, delay, map, of, throwError } from 'rxjs';
+import { Usuario, CredencialesLogin, Sesion } from '../models/usuario';
 import { AlmacenamientoService } from './almacenamiento';
 
 // Usuario de prueba, ya que todavía no hay backend real
@@ -16,20 +16,26 @@ const CLAVE_SESION = 'etshop_sesion';
 export class AuthService {
   private almacenamiento = inject(AlmacenamientoService);
 
-  private usuarioSubject = new BehaviorSubject<Usuario | null>(null);
-  usuario$ = this.usuarioSubject.asObservable();
+  private sesionSubject = new BehaviorSubject<Sesion | null>(null);
+  usuario$: Observable<Usuario | null> = this.sesionSubject.pipe(map(s => s?.usuario ?? null));
 
-  /** Se resuelve cuando la sesión guardada ya fue cargada (útil para guards). */
+  /** Se resuelve cuando la sesión guardada ya fue cargada (la usan el guard y el interceptor). */
   readonly listo: Promise<void>;
 
   constructor() {
     this.listo = this.restaurarSesion();
   }
 
+  /** Token de la sesión actual, o null si no hay sesión. */
+  get token(): string | null {
+    return this.sesionSubject.value?.token ?? null;
+  }
+
   private async restaurarSesion(): Promise<void> {
-    const guardado = await this.almacenamiento.leer<Usuario>(CLAVE_SESION);
-    if (guardado) {
-      this.usuarioSubject.next(guardado);
+    const guardada = await this.almacenamiento.leer<Sesion>(CLAVE_SESION);
+    // Se descartan sesiones guardadas con el formato anterior (sin token)
+    if (guardada?.usuario && guardada?.token) {
+      this.sesionSubject.next(guardada);
     }
   }
 
@@ -42,17 +48,25 @@ export class AuthService {
       return throwError(() => new Error('Correo o contraseña incorrectos')).pipe(delay(500));
     }
 
-    this.usuarioSubject.next(USUARIO_DEMO);
-    void this.almacenamiento.guardar(CLAVE_SESION, USUARIO_DEMO);
+    const sesion: Sesion = { usuario: USUARIO_DEMO, token: this.generarTokenDemo(USUARIO_DEMO) };
+    this.sesionSubject.next(sesion);
+    void this.almacenamiento.guardar(CLAVE_SESION, sesion);
     return of(USUARIO_DEMO).pipe(delay(500));
   }
 
   logout(): void {
-    this.usuarioSubject.next(null);
+    this.sesionSubject.next(null);
     void this.almacenamiento.borrar(CLAVE_SESION);
   }
 
   estaAutenticado(): boolean {
-    return this.usuarioSubject.value !== null;
+    return this.sesionSubject.value !== null;
+  }
+
+  /** Token ficticio con forma de JWT. Con un backend real lo entregaría el servidor. */
+  private generarTokenDemo(usuario: Usuario): string {
+    const cabecera = btoa(JSON.stringify({ alg: 'none', typ: 'DEMO' }));
+    const carga = btoa(JSON.stringify({ sub: usuario.id, correo: usuario.correo, iat: Date.now() }));
+    return `${cabecera}.${carga}.demo`;
   }
 }

@@ -25,13 +25,8 @@
   </div>
 
   <!-- Formulario para nuevo comentario -->
-  <div class="form-comentario">
-    <h4>Deja tu comentario</h4>
-
-    <input
-      type="text"
-      placeholder="Tu nombre"
-      [(ngModel)]="nombreNuevo">
+  <div class="form-comentario" *ngIf="usuario$ | async as usuario; else sinSesion">
+    <h4>Deja tu comentario como {{ usuario.nombre }}</h4>
 
     <div class="selector-estrellas">
       <span
@@ -49,7 +44,16 @@
       [(ngModel)]="textoNuevo">
     </textarea>
 
-    <button (click)="publicarComentario()">Publicar comentario</button>
+    <button (click)="publicarComentario(usuario.nombre)">Publicar comentario</button>
   </div>
+
+
+  <ng-template #sinSesion>
+    <div class="form-comentario">
+      <h4>Deja tu comentario</h4>
+      <p>Inicia sesión para comentar.</p>
+      <a routerLink="/tabs/cuenta" [queryParams]="{ redirect: urlActual }">Iniciar sesión</a>
+    </div>
+  </ng-template>
 
 </div>
