@@ -107,12 +107,31 @@ npm test
 - El catálogo y los comentarios iniciales están en `public/data/*.json` (solo lectura).
 - Lo que genera el usuario (carrito, sesión, comentarios nuevos) se guarda en el almacenamiento local del dispositivo. No se comparte entre dispositivos y se pierde si se desinstala la app o se borran sus datos. En el navegador, los modos de incógnito o "no guardar historial" lo borran al cerrar.
 
+## Imágenes de los productos
+
+Las imágenes se guardan dentro de la app (`public/img/dispositivos/`) para que se vean sin conexión. Para (re)descargarlas desde las URLs originales del catálogo:
+
+```bash
+node descargar-imagenes.mjs
+```
+
+El script reescribe `public/data/dispositivos.json` para que apunte a los archivos locales y avisa de las que no pudo descargar. Si una imagen falta o no carga, la app muestra `public/img/placeholder.svg`. Las fotos pertenecen a sus sitios de origen: es un proyecto académico; para publicarlo conviene usar imágenes propias o con licencia.
+
+## Generar un APK
+
+1. `npm run android` (compila y sincroniza).
+2. `npx cap open android`.
+3. En Android Studio: **Build → Generate App Bundles or APKs → Generate APKs** (o *Build APK(s)*).
+4. El archivo queda en `android/app/build/outputs/apk/debug/app-debug.apk`; se puede copiar al celular e instalar (hay que permitir "instalar apps desconocidas") o instalar por USB con `adb install -r app-debug.apk`.
+
+Ese APK es de depuración (sirve para pruebas y demostraciones). Para publicar en Google Play se necesita un APK/AAB **firmado** (*Build → Generate Signed App Bundle or APK*) con un keystore propio.
+
 ## Pendientes
 
 - Back-end (API REST) conforme al diagrama relacional (`documentos/ER diagram.png`) y repositorios HTTP.
 - Registro de usuarios y sistema de roles (usuario, vendedor, administrador, soporte).
 - Checkout real: dirección, método de pago y pedidos.
-- Imágenes y fuentes incluidas en la app para funcionar sin conexión.
+- Fuentes incluidas en la app para funcionar sin conexión.
 - Versión iOS.
 
 ## Autor
