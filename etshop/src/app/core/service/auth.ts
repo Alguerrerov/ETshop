@@ -1,19 +1,20 @@
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, Observable, delay, map, of, throwError } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { BehaviorSubject, Observable, catchError, map, tap, throwError } from 'rxjs';
 import { Usuario, CredencialesLogin, Sesion } from '../models/usuario';
+import { DjLoginRespuesta } from '../models/dummyjson';
+import { API_URL } from '../api.config';
 import { AlmacenamientoService } from './almacenamiento';
 
-// Usuario de prueba, ya que todavía no hay backend real
-const USUARIO_DEMO: Usuario = {
-  id: 1,
-  nombre: 'prueba',
-  correo: 'testeo@etshop.com'
-};
-const CONTRASENA_DEMO = '123456';
-const CLAVE_SESION = 'etshop_sesion';
+// Se cambió la clave al pasar a DummyJSON: así se descartan las sesiones demo anteriores
+const CLAVE_SESION = 'etshop_sesion_v2';
+
+/** Minutos de vigencia del token que se solicita a la API. */
+const MINUTOS_SESION = 60;
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+  private http = inject(HttpClient);
   private almacenamiento = inject(AlmacenamientoService);
 
   private sesionSubject = new BehaviorSubject<Sesion | null>(null);
@@ -33,25 +34,35 @@ export class AuthService {
 
   private async restaurarSesion(): Promise<void> {
     const guardada = await this.almacenamiento.leer<Sesion>(CLAVE_SESION);
-    // Se descartan sesiones guardadas con el formato anterior (sin token)
-    if (guardada?.usuario && guardada?.token) {
+    if (guardada?.usuario && guardada?.token && this.tokenVigente(guardada.token)) {
       this.sesionSubject.next(guardada);
+    } else if (guardada) {
+      // Sesión incompleta o con el token vencido
+      void this.almacenamiento.borrar(CLAVE_SESION);
     }
   }
 
+  /** Inicia sesión contra DummyJSON (POST /auth/login) y guarda el JWT recibido. */
   login(credenciales: CredencialesLogin): Observable<Usuario> {
-    const esValido =
-      credenciales.correo === USUARIO_DEMO.correo &&
-      credenciales.contrasena === CONTRASENA_DEMO;
-
-    if (!esValido) {
-      return throwError(() => new Error('Correo o contraseña incorrectos')).pipe(delay(500));
-    }
-
-    const sesion: Sesion = { usuario: USUARIO_DEMO, token: this.generarTokenDemo(USUARIO_DEMO) };
-    this.sesionSubject.next(sesion);
-    void this.almacenamiento.guardar(CLAVE_SESION, sesion);
-    return of(USUARIO_DEMO).pipe(delay(500));
+    return this.http
+      .post<DjLoginRespuesta>(`${API_URL}/auth/login`, {
+        username: credenciales.usuario.trim(),
+        password: credenciales.contrasena,
+        expiresInMins: MINUTOS_SESION,
+      })
+      .pipe(
+        map((r): Sesion => ({
+          usuario: { id: r.id, nombre: r.firstName || r.username, correo: r.email },
+          token: r.accessToken,
+          refreshToken: r.refreshToken,
+        })),
+        tap(sesion => {
+          this.sesionSubject.next(sesion);
+          void this.almacenamiento.guardar(CLAVE_SESION, sesion);
+        }),
+        map(sesion => sesion.usuario),
+        catchError(err => throwError(() => new Error(this.mensajeDeError(err))))
+      );
   }
 
   logout(): void {
@@ -63,10 +74,22 @@ export class AuthService {
     return this.sesionSubject.value !== null;
   }
 
-  /** Token ficticio con forma de JWT. Con un backend real lo entregaría el servidor. */
-  private generarTokenDemo(usuario: Usuario): string {
-    const cabecera = btoa(JSON.stringify({ alg: 'none', typ: 'DEMO' }));
-    const carga = btoa(JSON.stringify({ sub: usuario.id, correo: usuario.correo, iat: Date.now() }));
-    return `${cabecera}.${carga}.demo`;
+  private mensajeDeError(err: unknown): string {
+    if (err instanceof HttpErrorResponse) {
+      if (err.status === 400 || err.status === 401) return 'Usuario o contraseña incorrectos';
+      if (err.status === 0) return 'No se pudo conectar con el servidor. Revisa tu conexión.';
+    }
+    return 'No se pudo iniciar sesión. Inténtalo de nuevo.';
+  }
+
+  /** Lee la fecha de vencimiento (exp) del JWT. Si no se puede leer, se considera vigente. */
+  private tokenVigente(token: string): boolean {
+    try {
+      const base64 = token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');
+      const { exp } = JSON.parse(atob(base64));
+      return typeof exp !== 'number' || exp * 1000 > Date.now();
+    } catch {
+      return true;
+    }
   }
 }

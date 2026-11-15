@@ -144,25 +144,33 @@
       <section class="especificaciones">
         <h3>Especificaciones técnicas</h3>
         <dl>
-          <div class="spec-row">
+          <div class="spec-row" *ngIf="dispositivo.especificaciones.ram">
             <dt>RAM</dt>
             <dd>{{ dispositivo.especificaciones.ram }}</dd>
           </div>
-          <div class="spec-row">
+          <div class="spec-row" *ngIf="dispositivo.especificaciones.almacenamiento">
             <dt>Almacenamiento</dt>
             <dd>{{ dispositivo.especificaciones.almacenamiento }}</dd>
           </div>
-          <div class="spec-row">
+          <div class="spec-row" *ngIf="dispositivo.especificaciones.pantalla">
             <dt>Pantalla</dt>
             <dd>{{ dispositivo.especificaciones.pantalla }}</dd>
           </div>
-          <div class="spec-row">
+          <div class="spec-row" *ngIf="dispositivo.especificaciones.bateria">
             <dt>Batería</dt>
             <dd>{{ dispositivo.especificaciones.bateria }}</dd>
           </div>
-          <div class="spec-row">
+          <div class="spec-row" *ngIf="dispositivo.especificaciones.procesador">
             <dt>Procesador</dt>
             <dd>{{ dispositivo.especificaciones.procesador }}</dd>
+          </div>
+          <div class="spec-row" *ngIf="dispositivo.especificaciones.sku">
+            <dt>Referencia (SKU)</dt>
+            <dd>{{ dispositivo.especificaciones.sku }}</dd>
+          </div>
+          <div class="spec-row" *ngIf="dispositivo.especificaciones.garantia">
+            <dt>Garantía</dt>
+            <dd>{{ dispositivo.especificaciones.garantia }}</dd>
           </div>
         </dl>
       </section>

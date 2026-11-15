@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Cuenta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="login-container" *ngIf="usuario$ | async as usuario; else formulario">
+    <div class="login-card">
+      <h1>Hola, {{ usuario.nombre }}</h1>
+      <p class="subtitulo">{{ usuario.correo }}</p>
+      <button type="button" (click)="cerrarSesion()">Cerrar sesión</button>
+    </div>
+  </div>
+
+  <ng-template #formulario>
+<div class="login-container">
+  <div class="login-card">
+    <span class="logo">
+      <span class="logo-mark">et</span><span class="logo-rest">shop</span>
+    </span>
+
+    <h1>Inicia sesión</h1>
+    <p class="subtitulo">Accede a tu cuenta para comprar y dejar comentarios</p>
+
+    <form (ngSubmit)="onSubmit()">
+      <div class="campo">
+        <label>Usuario</label>
+        <input
+          type="text"
+          placeholder="tu usuario"
+          autocomplete="username"
+          [(ngModel)]="usuario"
+          name="usuario">
+      </div>
+
+      <div class="campo">
+        <label>Contraseña</label>
+        <input
+          type="password"
+          placeholder="••••••••"
+          autocomplete="current-password"
+          [(ngModel)]="contrasena"
+          name="contrasena">
+      </div>
+
+      <p class="mensaje-error" *ngIf="mensajeError">{{ mensajeError }}</p>
+
+      <button type="submit" [disabled]="cargando">
+        {{ cargando ? 'Ingresando...' : 'Iniciar sesión' }}
+      </button>
+    </form>
+
+    <p class="ayuda-demo">
+      Demo: <strong>emilys</strong> / <strong>emilyspass</strong>
+    </p>
+
+    <a routerLink="/tabs/home" class="volver">← Volver a la tienda</a>
+  </div>
+</div>
+  </ng-template>
+</ion-content>

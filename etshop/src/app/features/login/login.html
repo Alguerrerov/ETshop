@@ -25,12 +25,13 @@
 
     <form (ngSubmit)="onSubmit()">
       <div class="campo">
-        <label>Correo electrónico</label>
+        <label>Usuario</label>
         <input
-          type="email"
-          placeholder="tucorreo@ejemplo.com"
-          [(ngModel)]="correo"
-          name="correo">
+          type="text"
+          placeholder="tu usuario"
+          autocomplete="username"
+          [(ngModel)]="usuario"
+          name="usuario">
       </div>
 
       <div class="campo">
@@ -38,6 +39,7 @@
         <input
           type="password"
           placeholder="••••••••"
+          autocomplete="current-password"
           [(ngModel)]="contrasena"
           name="contrasena">
       </div>
@@ -50,7 +52,7 @@
     </form>
 
     <p class="ayuda-demo">
-      Demo: <strong>testeo&#64;etshop.com</strong> / <strong>123456</strong>
+      Demo: <strong>emilys</strong> / <strong>emilyspass</strong>
     </p>
 
     <a routerLink="/tabs/home" class="volver">← Volver a la tienda</a>

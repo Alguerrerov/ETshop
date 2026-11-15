@@ -6,9 +6,9 @@ import { provideIonicAngular } from '@ionic/angular';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './core/interceptors/auth.interceptor';
 import { IDispositivoRepository } from './core/repositories/dispositivo-repository.interface';
-import { DispositivoJsonRepository } from './core/repositories/dispositivo-json.repository';
+import { DispositivoDummyJsonRepository } from './core/repositories/dispositivo-dummyjson.repository';
 import { IComentarioRepository } from './core/repositories/comentario-repository.interface';
-import { ComentarioJsonRepository } from './core/repositories/comentario-json.repository';
+import { ComentarioDummyJsonRepository } from './core/repositories/comentario-dummyjson.repository';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,7 +21,7 @@ export const appConfig: ApplicationConfig = {
     ),
     provideIonicAngular({}),
     provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
-    { provide: IDispositivoRepository, useClass: DispositivoJsonRepository },
-    { provide: IComentarioRepository, useClass: ComentarioJsonRepository },
+    { provide: IDispositivoRepository, useClass: DispositivoDummyJsonRepository },
+    { provide: IComentarioRepository, useClass: ComentarioDummyJsonRepository },
   ],
 };

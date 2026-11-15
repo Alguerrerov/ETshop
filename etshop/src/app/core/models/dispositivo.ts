@@ -1,11 +1,14 @@
 export type TipoDispositivo = 'celular' | 'portatil';
 
+/** Todas son opcionales: según el origen de datos, un producto puede no traer algunas. */
 export interface Especificaciones {
-  ram: string;
-  almacenamiento: string;
-  pantalla: string;
-  bateria: string;
-  procesador: string;
+  ram?: string;
+  almacenamiento?: string;
+  pantalla?: string;
+  bateria?: string;
+  procesador?: string;
+  sku?: string;
+  garantia?: string;
 }
 
 export interface Dispositivo {

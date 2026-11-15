@@ -10,7 +10,9 @@ import { API_URL } from '../api.config';
  * y cierra la sesión si el servidor responde 401.
  */
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  if (!req.url.startsWith(API_URL)) {
+  // Solo las peticiones a la API; el login y el refresh no llevan token
+  const esLlamadaAuthPublica = req.url === `${API_URL}/auth/login` || req.url === `${API_URL}/auth/refresh`;
+  if (!req.url.startsWith(API_URL) || esLlamadaAuthPublica) {
     return next(req);
   }
 

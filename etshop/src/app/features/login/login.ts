@@ -18,21 +18,21 @@ export class Login {
 
   usuario$ = this.authService.usuario$;
 
-  correo = '';
+  usuario = '';
   contrasena = '';
   cargando = false;
   mensajeError = '';
 
   onSubmit(): void {
-    if (!this.correo.trim() || !this.contrasena.trim()) {
-      this.mensajeError = 'Completa correo y contraseña.';
+    if (!this.usuario.trim() || !this.contrasena.trim()) {
+      this.mensajeError = 'Completa usuario y contraseña.';
       return;
     }
 
     this.cargando = true;
     this.mensajeError = '';
 
-    this.authService.login({ correo: this.correo, contrasena: this.contrasena }).subscribe({
+    this.authService.login({ usuario: this.usuario, contrasena: this.contrasena }).subscribe({
       next: () => {
         this.cargando = false;
         void this.router.navigateByUrl(this.destinoTrasLogin());
@@ -53,7 +53,7 @@ export class Login {
 
   cerrarSesion(): void {
     this.authService.logout();
-    this.correo = '';
+    this.usuario = '';
     this.contrasena = '';
   }
 }
